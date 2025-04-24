@@ -1,3 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pawfect Match - Animal Adoption</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+
+<body>
+
+<header>
+  <h1>Pawfect Match</h1>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="#adopt">Adopt</a></li>
+      <li><a href="#request">Adoption Request</a></li>
+      <li><a href="#welfare">Welfare Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <h2>Find Your New Best Friend</h2>
+  <p>Adopt a pet. Give love. Save lives.</p>
+</section>
+
+<section id="adopt">
+  <h3>Adoptable Animals</h3>
+
+  <div class="form-container">
+    <form action="/add_animal" method="POST" enctype="multipart/form-data">
+      <label for="animalName">Animal Name:</label>
+      <input type="text" id="animalName" name="name" required>
+
+      <label for="animalAge">Age:</label>
+      <input type="number" id="animalAge" name="age" required>
+
+      <label for="animalBreed">Breed:</label>
+      <input type="text" id="animalBreed" name="breed" required>
+
+      <label for="animalImage">Image:</label>
+      <input type="file" id="animalImage" name="image" accept="image/*" required>
+
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+
+  <div class="subMenu" id="animalList">
+    {% for animal in animals %}
+    <div>
+      <img src="{{ url_for('static', filename='uploads/' + animal.ImagePath) }}" alt="{{ animal.Breed }}">
+      <p>
+        <strong>Name:</strong> {{ animal.Name }}<br>
+        <strong>Age:</strong> {{ animal.Age }} Years<br>
+        <strong>Breed:</strong> {{ animal.Breed }}<br>
+        <button onclick="alert('Adoption request sent for {{ animal.Name }}')">Adopt Me</button>
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="request" style="background-color: #e9e9e9;">
+  <h3>Submit Adoption Request</h3>
+  <div class="form-container">
+    <form action="/adoption_request" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <input type="text" name="preferred_animal" placeholder="Preferred Animal (e.g., Max)" />
+      <textarea name="reason" placeholder="Why do you want to adopt?" rows="4"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+
+<section id="welfare">
+  <h3>Welfare Services</h3>
+  <div class="form-container">
+    <h4>Vaccination Camps</h4>
+    <p>Free monthly camps for vaccinated stray and adopted pets.</p>
+  </div>
+  <div class="form-container">
+    <h4>Lost & Found Assistance</h4>
+    <p>Helping owners reconnect with lost pets using our community network.</p>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <h3>Contact Us</h3>
+  <p>Email: support@pawfectmatch.org | Phone: +91-98765-43210</p>
+</section>
+
+<footer>
+  &copy; 2025 Pawfect Match. All rights reserved.
+</footer>
+
+</body>
+</html>
+index html coe
 body {
     font-family: Arial, sans-serif;
     margin: 0;
